@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Day Calculator
+        </title>
+    </head>
+    <body style="background-color:teal;">
+        <div align="center">
+        <h1><u>Day Calculator:</u></h1>
+        <b>DATE:</b> <input type="date" id ="h">
+        <br><br>
+        <input type="submit" onclick="f();">
+        <br>
+        <br>
+        <h1 id="result"></h1>
+        </div>
+        <script>
+            var d,m,y,w,r;
+            var mo=[0,3,3,6,8,11,13,16,19,21,24,26,29];
+            var day=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+            function f()
+            {
+                var x=document.getElementById("h").value;
+                var l=x.length;
+                d=parseInt(x[l-2]);
+                d=d*10;
+                d=d+parseInt(x[l-1]);
+                m=parseInt(x[l-5]);
+                m=m*10;
+                m=m+parseInt(x[l-4]);
+                y=0;
+                for(var i=0;i<4;i++)
+                {
+                y=y*10;
+                y=y+parseInt(x[i]);
+                r=(y-1)%400;
+                r=r/100;
+                if(r==1)
+                {
+                    w=5;
+                }
+                else if(r==2)
+                {
+                    w=3;
+                }
+                else if(r==3)
+                {
+                    w=1;
+                }
+                else
+                {
+                    w=0;
+                }
+                r=y%100;
+                if(r%4==0 && y%100!=0 && m>2)
+                {
+                    w++;
+                }
+                r=r-1;
+                ly=parseInt(r/4);
+                ny=r-ly;
+                r=(2*ly)+ny;
+                r=r%7;
+                w+=r;
+                w+=(mo[m-1]%7);
+                w+=(d%7);
+                w%=7;
+                document.getElementById("result").innerHTML = day[w];
+            }
+            }
+        </script>
+    </body>
+</html>
